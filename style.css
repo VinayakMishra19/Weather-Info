@@ -53,6 +53,18 @@ body{
     flex-direction: column;
 }
 
+#Current-location{
+    width: 40%;
+    margin-top: 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+    border: 0;
+    outline: none;
+    background-color:var(--primary-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
 .search {
     width: 100%;
     display: flex;
@@ -144,6 +156,14 @@ body{
     margin-left: 10px;
     font-size: 14px;
     margin-top: 10px;
+    display: none;
+}
+
+.errorlatilongi{
+    text-align: left;
+    margin-left: 10px;
+    font-size: 14px;
+    margin-top: 20px;
     display: none;
 }
 
