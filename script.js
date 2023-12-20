@@ -9,10 +9,15 @@ const weatherIcon = document.querySelector(".weather-icon");
 async function checkWeather(city) {
   const response = await fetch(apiurl + city + `&appid=${apikey}`);
 
-  if (response.status == 404) {
+
+
+  if (response.status == 404) 
+  {
     document.querySelector(".error").style.display = "block";
     document.querySelector(".weather-info").style.display = "none";
-  } else {
+  } 
+  else 
+  {
     var data = await response.json();
 
     document.querySelector(".city").innerHTML = data.name;
@@ -41,3 +46,16 @@ async function checkWeather(city) {
 searchbtn.addEventListener("click", () => {
   checkWeather(searchbox.value);
 });
+
+var icon = document.getElementById("Icon");
+icon.onclick = function () {
+        document.body.classList.toggle("dark-theme");
+        if(document.body.classList.contains("dark-theme")){
+          icon.src="images/sun.png"
+        }
+        else{
+          icon.src="images/moon.png"
+        }
+}
+
+
