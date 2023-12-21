@@ -13,10 +13,13 @@
     <div class="container">
        
         <div class="search">
-            <input id="input" type="text" placeholder="Enter City Name"  >
-            <button><img src="images/search.png" ></button>
+            <input id="input" type="text" placeholder="Enter City Name" onkeyup="goodFunction()" >
+            <button id="Searchicon" onclick="Funcallinfo()"><img src="images/search.png" ></button>
         </div>
-        <button id="Current-location">Use your Current Location </button>
+        
+        <div id="Current-location-icon">
+            <img id="Current-location" src="images/lightmode-currentlocation-icon.png">
+        </div>
 
         <div class="errorlatilongi">
             <p>Unable to Find Please Search Manually....</p>

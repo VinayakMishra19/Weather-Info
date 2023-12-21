@@ -53,17 +53,6 @@ body{
     flex-direction: column;
 }
 
-#Current-location{
-    width: 10rem;
-    margin-top: 20px;
-    border-radius: 5px;
-    margin-left: 20px;
-    border: 0;
-    outline: none;
-    background-color:var(--primary-color);
-    color: var(--secondary-color);
-    cursor: pointer;
-}
 
 .search {
     width: 100%;
@@ -182,6 +171,25 @@ body{
     margin-top: 50px;
     margin-right: 10px;
 }
+
+#Current-location-icon {
+    width: 2.5rem;
+    margin-top: 20px;
+    border-radius: 5px;
+    margin-left: 20px;
+    border: 0;
+    outline: none;
+    background-color:var(--primary-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+    background-color:transparent;
+}
+
+#Current-location{
+    width: 1rem;
+    
+}
+
 
 
 @media (max-width:450px) {
