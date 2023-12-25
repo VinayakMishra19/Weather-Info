@@ -7,7 +7,7 @@ const searchbox = document.querySelector(".search input");
 const searchbtn = document.querySelector(".search button");
 const weatherIcon = document.querySelector(".weather-icon");
 
-function showWeatherPopup() {
+
   
   var userConfirmation = confirm("Check Weather Condition of your Current Location");
   if(userConfirmation)
@@ -56,16 +56,11 @@ function showWeatherPopup() {
     }
   });
 }
-}     
+     
 
 
 
-// Call the showWeatherPopup function when the user comes on screen
-document.addEventListener('visibilitychange', function() {
-  if (document.visibilityState === 'visible') {
-      showWeatherPopup();
-  }
-});
+
 
 
 
