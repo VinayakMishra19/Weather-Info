@@ -8,16 +8,21 @@ const searchbtn = document.querySelector(".search button");
 const weatherIcon = document.querySelector(".weather-icon");
 
 
+
+
   
   var userConfirmation = confirm("Check Weather Condition of your Current Location");
+ 
   if(userConfirmation)
   {
+   
+    
     navigator.geolocation.getCurrentPosition(function(position) {
       var lati = position.coords.latitude;
       var longi = position.coords.longitude;
       directlocat(lati,longi);
+     
       
-    
 
      async function directlocat(lati,longi) {
       const responsedirect = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lati}&lon=${longi}` + `&appid=${apikey}`);
@@ -55,7 +60,12 @@ const weatherIcon = document.querySelector(".weather-icon");
       }
     }
   });
+ 
 }
+
+
+
+
      
 
 
@@ -67,15 +77,20 @@ const weatherIcon = document.querySelector(".weather-icon");
 
 const getlocationicon= document.getElementById('Current-location');
 // User's latitude longitude for getting his/her location without any typping work.....
+
+
 function gotData(position)
 {
   var lati = position.coords.latitude;
+  
   var longi = position.coords.longitude;
+ 
   getdata(lati,longi);
 }
 
 getlocationicon.addEventListener('click', ()=>{
   navigator.geolocation.getCurrentPosition(gotData);
+ 
 })
 
   
@@ -83,6 +98,9 @@ getlocationicon.addEventListener('click', ()=>{
 
 async function getdata(lati, longi) {
   const responsecity = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lati}&lon=${longi}` + `&appid=${apikey}`);
+
+
+
 
   if (responsecity.status == 404) 
   {
@@ -121,12 +139,8 @@ async function getdata(lati, longi) {
   
 
 
-
-
-
-
-
-
+city=localStorage.getItem("mylocation");
+checkWeather(city)
 // this function will execute after getting the users input 
 async function checkWeather(city) {
   const response = await fetch(apiurl + city + `&appid=${apikey}`);
@@ -135,7 +149,7 @@ async function checkWeather(city) {
 
   if (response.status == 404) 
   {
-    document.querySelector(".error").style.display = "block";
+    document.querySelector(".error").style.display = "none";
     document.querySelector(".weather-info").style.display = "none";
   } 
   else 
@@ -166,27 +180,60 @@ async function checkWeather(city) {
   }
 }
 
+searchbox.addEventListener('input' ,(e)=>{
+   localStorage.setItem("mylocation",e.target.value)
+   
+
+})
+
 // here will send the users city request into our main function so that api start to fetch the data for that city
 searchbtn.addEventListener("click", () => {
+  // localStorage.setItem("mylocation",searchbox.value)
   checkWeather(searchbox.value);
+  
+
 });
 
 
 
 //Dark-Light Theme....
+
+
 var icon = document.getElementById("Icon");
 var iconcurrentloc = document.getElementById("Current-location");
-icon.onclick = function () {
-        document.body.classList.toggle("dark-theme");
-        if(document.body.classList.contains("dark-theme")){
-          icon.src="images/sun.png"
-          iconcurrentloc.src = "images/darkmode-currentlocation-icon.png"
-        }
-        else{
-          icon.src="images/moon.png"
-          iconcurrentloc.src = "images/lightmode-currentlocation-icon.png"
-        }
+
+function darkmode(){
+  let setTheme=document.body;
+  setTheme.classList.toggle('dark-theme')
+
+  let theme;
+  if(setTheme.classList.contains('dark-theme')){
+    theme='DARK'
+    icon.src="images/sun.png"
+    iconcurrentloc.src = "images/darkmode-currentlocation-icon.png"
+
+  }
+  else{
+    theme='LIGHT'
+    icon.src="images/moon.png"
+    iconcurrentloc.src = "images/lightmode-currentlocation-icon.png"
+
+  }
+  localStorage.setItem('PageTheme',JSON.stringify(theme))
 }
+let getTheme=JSON.parse(localStorage.getItem('PageTheme'))
+
+if(getTheme == 'DARK')
+{
+  document.body.classList ='dark-theme';
+  icon.src="images/sun.png"
+  iconcurrentloc.src = "images/darkmode-currentlocation-icon.png"
+}
+
+
+
+
+
 
 
 // Debouncing in query 
@@ -229,3 +276,8 @@ const Funcallinfo= throttle(()=>{
       document.getElementById("Searchicon").disabled=false;
       console.log("User Requested for some query ");
 },1000)
+
+
+
+//local storage
+localStorage.getItem(icon,);

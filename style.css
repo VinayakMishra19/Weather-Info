@@ -13,12 +13,18 @@
    
 }
 
+
 .dark-theme{
     --primary-color: #000106;
     --secondary-color: #fff;
     --secondarybgimage-color: linear-gradient(0deg, #2b2828 0%, #2b2828 100%);
 }
 
+.toogle{
+    background: transparent;
+    outline: 0;
+    border: 0;
+}
 body{
     height: 100%;
     margin: 0;
