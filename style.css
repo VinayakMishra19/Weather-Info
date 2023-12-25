@@ -30,15 +30,57 @@ body{
     
 }
 
-#darklighttheme{
+#nav-container{
     width: 100%;
+    height: 20%;
+    margin-top: 3%;
+    display: flex;
+    justify-content: space-between;
+    
 }
-#darklighttheme img{
-    width: 2.5rem;
-    margin-top: 15px;
-    margin-left: 90%;
+
+#nav-container img{
+    width: 2rem;
+}
+#Current-location{
+    
+    border-radius: 5px;
+    margin-left: 20px;
+    border: 0;
+    outline: none;
+    background-color:var(--primary-color);
+    color: var(--secondary-color);
     cursor: pointer;
+    background-color:transparent;
 }
+
+#Icon {
+    margin-right: 20px;
+    border: 0;
+    outline: none;
+    background-color:var(--primary-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+    background-color:transparent;
+
+}
+
+/* #darklighttheme{
+   
+    border-radius: 5px;
+    margin-top: 3%;
+    margin-left: 40%;
+    border: 0;
+    outline: none;
+    background-color:var(--primary-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+    background-color:transparent;
+    
+
+} */
+
+
 
 
 .container{
@@ -172,8 +214,8 @@ body{
     margin-right: 10px;
 }
 
-#Current-location-icon {
-    width: 2.5rem;
+/* #Current-location-icon {
+    width: 0.5rem;
     margin-top: 20px;
     border-radius: 5px;
     margin-left: 20px;
@@ -183,12 +225,9 @@ body{
     color: var(--secondary-color);
     cursor: pointer;
     background-color:transparent;
-}
+} */
 
-#Current-location{
-    width: 1rem;
-    
-}
+
 
 
 

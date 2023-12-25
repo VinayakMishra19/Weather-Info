@@ -7,42 +7,96 @@ const searchbox = document.querySelector(".search input");
 const searchbtn = document.querySelector(".search button");
 const weatherIcon = document.querySelector(".weather-icon");
 
+function showWeatherPopup() {
+  
+  var userConfirmation = confirm("Check Weather Condition of your Current Location");
+  if(userConfirmation)
+  {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var lati = position.coords.latitude;
+      var longi = position.coords.longitude;
+      directlocat(lati,longi);
+      
+    
+
+     async function directlocat(lati,longi) {
+      const responsedirect = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lati}&lon=${longi}` + `&appid=${apikey}`);
+    
+      if (responsedirect.status == 404) 
+      {
+        document.querySelector(".errorlatilongi").style.display = "block";
+        document.querySelector(".weather-info").style.display = "none";
+      } 
+      else 
+      {
+        var data = await responsedirect.json();
+    
+        document.querySelector(".city").innerHTML = data.name;
+        document.querySelector(".temperature").innerHTML =Math.round(data.main.temp) + "°c";
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+    
+        if (data.weather[0].main == "Clouds")
+        {
+          weatherIcon.src = "images/clouds.png";
+        } 
+        else if (data.weather[0].main == "Clear") 
+        {
+          weatherIcon.src = "images/clear.png";
+        } 
+        else if (data.weather[0].main == "Rain") 
+        {
+          weatherIcon.src = "images/rain.png";
+        }
+    
+        document.querySelector(".weather-info").style.display = "block";
+        document.querySelector(".errorlatilongi").style.display = "none";
+        
+      }
+    }
+  });
+}
+}     
+
+
+
+// Call the showWeatherPopup function when the user comes on screen
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'visible') {
+      showWeatherPopup();
+  }
+});
+
 
 
 
 const getlocationicon= document.getElementById('Current-location');
-
-
-/*async function gotlocation(position){
-    getdata(position.coords.latitude, position.coords.longitude)
+// User's latitude longitude for getting his/her location without any typping work.....
+function gotData(position)
+{
+  var lati = position.coords.latitude;
+  var longi = position.coords.longitude;
+  getdata(lati,longi);
 }
 
-function failedtoget(){
-  console.log('There are some issues');
-}
-*/
-
-// User Ip address for getting his/her location without any typping work.....
-getlocationicon.addEventListener('click', async () =>{
-    const result= await fetch("https://ipapi.co/json/");
-
-    var data=await result.json();
-    // console.log(data);
-    getdata(data.city);
+getlocationicon.addEventListener('click', ()=>{
+  navigator.geolocation.getCurrentPosition(gotData);
 })
 
-// Will directly get location access without any input
-async function getdata(city) {
-  const responselatilongi = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${city}` + `&appid=${apikey}`);
+  
 
-  if (responselatilongi.status == 404) 
+
+async function getdata(lati, longi) {
+  const responsecity = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lati}&lon=${longi}` + `&appid=${apikey}`);
+
+  if (responsecity.status == 404) 
   {
     document.querySelector(".errorlatilongi").style.display = "block";
     document.querySelector(".weather-info").style.display = "none";
   } 
   else 
   {
-    var data = await responselatilongi.json();
+    var data = await responsecity.json();
 
     document.querySelector(".city").innerHTML = data.name;
     document.querySelector(".temperature").innerHTML =Math.round(data.main.temp) + "°c";
@@ -64,9 +118,14 @@ async function getdata(city) {
 
     document.querySelector(".weather-info").style.display = "block";
     document.querySelector(".errorlatilongi").style.display = "none";
-    document.getElementById('Current-location').style.display ="none";
+    
   }
 }
+
+
+  
+
+
 
 
 
@@ -108,7 +167,7 @@ async function checkWeather(city) {
 
     document.querySelector(".weather-info").style.display = "block";
     document.querySelector(".error").style.display = "none";
-    document.getElementById('Current-location').style.display ="none";
+   
   }
 }
 
