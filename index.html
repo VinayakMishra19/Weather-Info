@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>getWeatherinfo</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <nav id="nav-container">
-       
-            <img id="Current-location" src="images/lightmode-currentlocation-icon.png">
-        
-            <button type="button" class="toogle" onclick='darkmode()'><img src="images/moon.png" id="Icon"></button>
-        
-            
-       
-            
+
+        <img id="Current-location" src="images/lightmode-currentlocation-icon.png">
+
+        <button type="button" class="toogle" onclick='darkmode()'><img src="images/moon.png" id="Icon"></button>
+
+
+
+
     </nav>
     <div class="container">
-       
+
         <div class="search">
-            <input id="input" type="text" placeholder="Enter City Name" onkeyup="goodFunction()" >
-            <button id="Searchicon" onclick="Funcallinfo()"><img src="images/search.png" ></button>
+            <input id="input" type="text" placeholder="Enter City Name" onkeyup="goodFunction()">
+            <button id="Searchicon" onclick="Funcallinfo()"><img src="images/search.png"></button>
         </div>
-        
-        
+
+
 
         <div class="errorlatilongi">
             <p>Unable to Find Please Search Manually....</p>
@@ -38,22 +40,22 @@
             <div class="main-info">
 
                 <img src="images/rain.png" class="weather-icon">
-            
-            <div class="main-value">
-                <h1 class="temperature">19°c</h1>
-                <h2 class="city">Virar</h2>
-            </div>
+
+                <div class="main-value">
+                    <h1 class="temperature">19°c</h1>
+                    <h2 class="city">Virar</h2>
+                </div>
 
             </div>
-             
-         
-           
-            
+
+
+
+
 
             <div class="weather-details">
 
                 <div class="col">
-                    <img src="images/humidity.png" >
+                    <img src="images/humidity.png">
                     <div>
                         <p class="humidity">50%</p>
                         <p class="col1">Humidity</p>
@@ -61,7 +63,7 @@
                 </div>
 
                 <div class="col">
-                    <img src="images/wind.png" >
+                    <img src="images/wind.png">
                     <div>
                         <p class="wind">15 km/hr</p>
                         <p class="col2">Wind Speed</p>
@@ -70,11 +72,11 @@
             </div>
 
 
-            </div>
         </div>
-    
-       
-        
+    </div>
+
+
+
 
 
     </div>
@@ -84,4 +86,5 @@
 
 
 </body>
+
 </html>
