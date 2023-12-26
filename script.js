@@ -9,61 +9,86 @@ const weatherIcon = document.querySelector(".weather-icon");
 
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  
+  var hasPermission = localStorage.getItem("Permission");
 
   
+  if (hasPermission === null || hasPermission === "false") {
+      Permissionpopup();
+  } 
+  else 
+  {
+      
+    showthecurrentweather();
+  }
+});
+
+function Permissionpopup ()
+{ 
   var userConfirmation = confirm("Check Weather Condition of your Current Location");
  
+  localStorage.setItem("Permission",userConfirmation)
+
   if(userConfirmation)
   {
    
+    showthecurrentweather();
     
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var lati = position.coords.latitude;
-      var longi = position.coords.longitude;
-      directlocat(lati,longi);
-     
-      
+  }
+  else{
+    alert("........You can check the weather manually now!......... ")
+  }
 
-     async function directlocat(lati,longi) {
-      const responsedirect = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lati}&lon=${longi}` + `&appid=${apikey}`);
-    
-      if (responsedirect.status == 404) 
-      {
-        document.querySelector(".errorlatilongi").style.display = "block";
-        document.querySelector(".weather-info").style.display = "none";
-      } 
-      else 
-      {
-        var data = await responsedirect.json();
-    
-        document.querySelector(".city").innerHTML = data.name;
-        document.querySelector(".temperature").innerHTML =Math.round(data.main.temp) + "°c";
-        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
-        document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
-    
-        if (data.weather[0].main == "Clouds")
-        {
-          weatherIcon.src = "images/clouds.png";
-        } 
-        else if (data.weather[0].main == "Clear") 
-        {
-          weatherIcon.src = "images/clear.png";
-        } 
-        else if (data.weather[0].main == "Rain") 
-        {
-          weatherIcon.src = "images/rain.png";
-        }
-    
-        document.querySelector(".weather-info").style.display = "block";
-        document.querySelector(".errorlatilongi").style.display = "none";
-        
-      }
-    }
-  });
- 
 }
 
+//This function will called when user gives access 
+function showthecurrentweather()
+{
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var lati = position.coords.latitude;
+    var longi = position.coords.longitude;
+    directlocat(lati,longi);
+   
+    
 
+   async function directlocat(lati,longi) {
+    const responsedirect = await fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lati}&lon=${longi}` + `&appid=${apikey}`);
+  
+    if (responsedirect.status == 404) 
+    {
+      document.querySelector(".errorlatilongi").style.display = "block";
+      document.querySelector(".weather-info").style.display = "none";
+    } 
+    else 
+    {
+      var data = await responsedirect.json();
+  
+      document.querySelector(".city").innerHTML = data.name;
+      document.querySelector(".temperature").innerHTML =Math.round(data.main.temp) + "°c";
+      document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+      document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+  
+      if (data.weather[0].main == "Clouds")
+      {
+        weatherIcon.src = "images/clouds.png";
+      } 
+      else if (data.weather[0].main == "Clear") 
+      {
+        weatherIcon.src = "images/clear.png";
+      } 
+      else if (data.weather[0].main == "Rain") 
+      {
+        weatherIcon.src = "images/rain.png";
+      }
+  
+      document.querySelector(".weather-info").style.display = "block";
+      document.querySelector(".errorlatilongi").style.display = "none";
+      
+    }
+  }
+});
+}
 
 
      
@@ -139,7 +164,7 @@ async function getdata(lati, longi) {
   
 
 
-city=localStorage.getItem("mylocation");
+var city=localStorage.getItem("mylocation");
 checkWeather(city)
 // this function will execute after getting the users input 
 async function checkWeather(city) {
