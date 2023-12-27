@@ -229,5 +229,4 @@ const Funcallinfo = throttle(() => {
   console.log("User Requested for some query ");
 }, 1000);
 
-//local storage
-localStorage.getItem(icon);
+
